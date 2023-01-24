@@ -20,6 +20,7 @@ jobs:
         run: 
           echo "The time was ${{ steps.hello.outputs.time }}"
           echo "The test was ${{ steps.hello.outputs.test }}"
+          uname -a
       - name: View context attributes
         uses: actions/github-script@v5
         with:
