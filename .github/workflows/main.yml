@@ -5,14 +5,20 @@ jobs:
     runs-on: self-hosted
     name: A job to say hello
     steps:
-      - name: Super-Linter
-        uses: github/super-linter@v4.10.1
-      - name: CodeGuru Reviewer
-        uses: aws-actions/codeguru-reviewer@v1.1
-        with:
-          # S3 Bucket which will be used for code reviews
-          s3_bucket: test-name
-      - name: View context attributes
-        uses: actions/github-script@v5
-        with:
-          script: console.log(context)
+    - name: GH Script Action
+      uses: actions/github-script@v6
+      id: set-result
+      with:
+        script: return "Hello!"
+        result-encoding: string
+    - name: Get result
+      run: echo "${{steps.set-result.outputs.result}}"
+    - name: CodeGuru Reviewer
+      uses: aws-actions/codeguru-reviewer@v1.1
+      with:
+      # S3 Bucket which will be used for code reviews
+        s3_bucket: test-name
+    - name: View context attributes
+      uses: actions/github-script@v5
+      with:
+        script: console.log(context)
