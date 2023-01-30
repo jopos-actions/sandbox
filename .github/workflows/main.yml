@@ -20,6 +20,7 @@ jobs:
         run: 
           echo "The time was ${{ steps.hello.outputs.time }}"
           echo "The test was ${{ steps.hello.outputs.test }}"
+          echo "Windows runner test"
       - name: CodeGuru Reviewer
         uses: aws-actions/codeguru-reviewer@v1.1
         with:
