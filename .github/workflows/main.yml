@@ -1,23 +1,20 @@
 on: [push]
 
 jobs:
-  hello_world_job:
+  gpSecurityJob:
+    name: GP Security Check Job
     #runs-on: self-hosted
     runs-on: ubuntu-latest
-    name: A job to say hello
     steps:
-    - name: GP Security Scan
-      # You may pin to the exact commit or the version.
-      # uses: whitesource/GitHubPackagesSecurityAction@b5f36d0e95550dd5699e967862e882fcee19fa2c
-      uses: whitesource/GitHubPackagesSecurityAction@19.10.2
-      with:
-        # GitHub access token with read/write privileges to GitHub Packages
-        gp-token: ${{ secrets.GP_ACCESS_TOKEN }}
-        # WS environment destination url
-        ws-destination-url: https://saas.whitesourcesoftware.com/agent
-        # WS organization api key
-        ws-api-key: ${{ secrets.WS_KEY }}
-        # WS user key
-        ws-user-key: ${{ secrets.WS_KEY }}
-        actions_step_debug: true
+      - name: GP Security Check Step
+        id: gp-security-check
+        uses: whitesource/GitHubPackagesSecurityAction@19.10.2
+        with:
+          gp-token: ${{ secrets.GP_ACCESS_TOKEN }}
+          ws-api-key: ${{ secrets.WS_KEY }}
+          ws-user-key: ${{ secrets.WS_KEY }}
+          ws-product-key: ${{ secrets.WS_KEY }}
+          ws-destination-url: https://saas.whitesourcesoftware.com/agent
+          print-scan-report: true
+          actions_step_debug: true
 
