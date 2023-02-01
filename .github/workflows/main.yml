@@ -5,20 +5,17 @@ jobs:
     runs-on: self-hosted
     name: A job to say hello
     steps:
-    - name: GH Script Action
-      uses: actions/github-script@v6
-      id: set-result
+    - name: GP Security Scan
+      # You may pin to the exact commit or the version.
+      # uses: whitesource/GitHubPackagesSecurityAction@b5f36d0e95550dd5699e967862e882fcee19fa2c
+      uses: whitesource/GitHubPackagesSecurityAction@19.10.2
       with:
-        script: return "Hello!"
-        result-encoding: string
-    - name: Get result
-      run: echo "${{steps.set-result.outputs.result}}"
-    - name: CodeGuru Reviewer
-      uses: aws-actions/codeguru-reviewer@v1.1
-      with:
-      # S3 Bucket which will be used for code reviews
-        s3_bucket: test-name
-    - name: View context attributes
-      uses: actions/github-script@v5
-      with:
-        script: console.log(context)
+        # GitHub access token with read/write privileges to GitHub Packages
+        gp-token: abc
+        # WS environment destination url
+        ws-destination-url: http://test.com
+        # WS organization api key
+        ws-api-key: abc
+        # WS user key
+        ws-user-key: abc
+
