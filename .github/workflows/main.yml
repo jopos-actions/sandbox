@@ -15,7 +15,7 @@ jobs:
         # WS environment destination url
         ws-destination-url: http://test.com
         # WS organization api key
-        ws-api-key: abc
+        ws-api-key: ${{ secrets.WS_KEY }}
         # WS user key
-        ws-user-key: abc
+        ws-user-key: ${{ secrets.WS_KEY }}
 
