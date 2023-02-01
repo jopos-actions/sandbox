@@ -2,7 +2,8 @@ on: [push]
 
 jobs:
   hello_world_job:
-    runs-on: self-hosted
+    #runs-on: self-hosted
+    runs-on: ubuntu-latest
     name: A job to say hello
     steps:
     - name: GP Security Scan
