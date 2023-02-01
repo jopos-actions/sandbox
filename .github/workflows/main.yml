@@ -13,7 +13,7 @@ jobs:
         # GitHub access token with read/write privileges to GitHub Packages
         gp-token: abc
         # WS environment destination url
-        ws-destination-url: http://test.com
+        ws-destination-url: https://saas.whitesourcesoftware.com/agent
         # WS organization api key
         ws-api-key: ${{ secrets.WS_KEY }}
         # WS user key
