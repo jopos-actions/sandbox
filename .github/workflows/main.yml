@@ -18,4 +18,5 @@ jobs:
         ws-api-key: ${{ secrets.WS_KEY }}
         # WS user key
         ws-user-key: ${{ secrets.WS_KEY }}
+        actions_step_debug: false
 
