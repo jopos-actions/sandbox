@@ -1,9 +1,5 @@
-name: build
-on:
-  push:
-    branches:
-      - master
-  pull_request:
+name: ARM-test
+on: [push]
 jobs:
   build:
     name: Build
