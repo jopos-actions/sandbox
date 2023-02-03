@@ -3,11 +3,17 @@ on: [push]
 jobs:
   build:
     name: Build
-    #runs-on: self-hosted
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted
+    #runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: TruffleHog OSS
+        uses: trufflesecurity/trufflehog@main
+        with:
+          # Repository path
+          path: ./
+          base: sandbox
       - name: Lint Code Base
         uses: github/super-linter@v4
         env:
