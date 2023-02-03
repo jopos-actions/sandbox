@@ -3,11 +3,17 @@ on: [push]
 jobs:
   build:
     name: Build
-    #runs-on: self-hosted
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted
+    #runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: sandbox
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build an image from Dockerfile
         run: |
           docker build -t docker.io/my-organization/my-app:${{ github.sha }} .
