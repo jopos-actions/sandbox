@@ -1,20 +1,25 @@
-on: [push]
-
+name: build
+on:
+  push:
+    branches:
+      - master
+  pull_request:
 jobs:
-  gpSecurityJob:
-    name: GP Security Check Job
-    #runs-on: self-hosted
-    runs-on: ubuntu-latest
+  build:
+    name: Build
+    runs-on: self-hosted
     steps:
-      - name: GP Security Check Step
-        id: gp-security-check
-        uses: whitesource/GitHubPackagesSecurityAction@19.10.2
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build an image from Dockerfile
+        run: |
+          docker build -t docker.io/my-organization/my-app:${{ github.sha }} .
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
         with:
-          gp-token: ${{ secrets.GP_ACCESS_TOKEN }}
-          ws-api-key: ${{ secrets.WS_KEY }}
-          ws-user-key: ${{ secrets.WS_KEY }}
-          ws-product-key: ${{ secrets.WS_KEY }}
-          ws-destination-url: https://saas.whitesourcesoftware.com/agent
-          print-scan-report: true
-          actions_step_debug: true
-
+          image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
