@@ -8,15 +8,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v4.0.0
 
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          script: whoami
+#      - name: executing remote ssh commands using password
+#        uses: appleboy/ssh-action@v0.1.7
+#        with:
+#          host: ${{ secrets.HOST }}
+#          username: ${{ secrets.USERNAME }}
+#          password: ${{ secrets.PASSWORD }}
+#          port: ${{ secrets.PORT }}
+#          script: whoami
 
 #      - name: Deploy
 #        uses: peaceiris/actions-gh-pages@v3
