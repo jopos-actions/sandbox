@@ -12,8 +12,8 @@ jobs:
         uses: trufflesecurity/trufflehog@main
         with:
           # Repository path
-          path: .
-          base: sandbox
+          path: ./
+          base: main
 #      - name: Lint Code Base
 #        uses: github/super-linter@v4
 #        env:
