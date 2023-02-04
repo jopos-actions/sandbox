@@ -3,22 +3,20 @@ on: [push]
 jobs:
   build:
     name: Build
-    #runs-on: self-hosted
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted
+    #runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Rebuild Armbian
-        uses: ophub/amlogic-s9xxx-armbian@main
+      - name: Flutter Action
+        uses: subosito/flutter-action@v2
         with:
-          build_target: armbian
-          armbian_path: build/output/images/*.img
-          armbian_board: s905d_s905x3_s922x_s905x
-          armbian_kernel: 5.10.125_5.15.50
-          gh_token: ${{ secrets.GP_ACCESS_TOKEN }}
+          flutter-version: '3.0.5'
+          channel: 'stable'
+      - run: flutter --version
 
-#      - name: 📂 Sync files
+#      - name: FTP Deploy
 #        uses: SamKirkland/FTP-Deploy-Action@4.3.3
 #        with:
 #          server: ftp.samkirkland.com
