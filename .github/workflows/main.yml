@@ -9,11 +9,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v0.1.7
         with:
-          github_token: ${{ secrets.GP_ACCESS_TOKEN }}
-          publish_dir: ./public
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: whoami
+
+#      - name: Deploy
+#        uses: peaceiris/actions-gh-pages@v3
+#        with:
+#          github_token: ${{ secrets.GP_ACCESS_TOKEN }}
+#          publish_dir: ./public
 
 #      - name: Set foobar to cool
 #        uses: mikefarah/yq@master
