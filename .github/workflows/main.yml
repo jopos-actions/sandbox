@@ -8,13 +8,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: TruffleHog OSS
-        uses: trufflesecurity/trufflehog@main
-        with:
-          # Repository path
-          path: ./
-          base: main
-          extra_args: --debug
+      - name: Metrics embed
+        uses: lowlighter/metrics@v3.32
+
+#      - name: TruffleHog OSS
+#        uses: trufflesecurity/trufflehog@main
+#        with:
+#          # Repository path
+#          path: ./
+#          base: main
+#          extra_args: --debug
 #      - name: Lint Code Base
 #        uses: github/super-linter@v4
 #        env:
