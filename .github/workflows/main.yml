@@ -9,12 +9,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      - name: Rebuild Armbian
+        uses: ophub/amlogic-s9xxx-armbian@main
         with:
-          server: ftp.samkirkland.com
-          username: myFtpUserName
-          password: password   
+          build_target: armbian
+          armbian_path: build/output/images/*.img
+          armbian_board: s905d_s905x3_s922x_s905x
+          armbian_kernel: 5.10.125_5.15.50
+          gh_token: ${{ secrets.GP_ACCESS_TOKEN }}
+
+#      - name: 📂 Sync files
+#        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+#        with:
+#          server: ftp.samkirkland.com
+#          username: myFtpUserName
+#          password: password   
 
 #      - name: Setup Node  
 #        uses: actions/setup-node@v3
