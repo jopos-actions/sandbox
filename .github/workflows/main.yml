@@ -9,10 +9,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set foobar to cool
-        uses: mikefarah/yq@master
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          cmd: yq -i '.foo.bar = "cool"' 'action.yml'
+          github_token: ${{ secrets.GP_ACCESS_TOKEN }}
+          publish_dir: ./public
+
+#      - name: Set foobar to cool
+#        uses: mikefarah/yq@master
+#        with:
+#          cmd: yq -i '.foo.bar = "cool"' 'action.yml'
         
 #      - name: Metrics embed
 #        uses: lowlighter/metrics@v3.32
